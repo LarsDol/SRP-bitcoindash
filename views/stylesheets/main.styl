@@ -1,0 +1,224 @@
+/* Variables */
+@import 'nib'
+
+open-sans = "Open Sans", Helvetica, Arial, sans-serif
+PT-sans = "PT Sans", Helvetica, Arial, sans-serif
+
+color-blue-dark = #2b2937
+color-blue-dark-shadow = #1a1822
+color-blue-dark-var = #32364e
+color-blue-normal = #394264
+color-blue-normal-shadow = #252c45
+color-blue-normal-border = #0f0f11
+color-blue-normal-text = #9095aa
+color-green-light = #1abc9c
+color-green-light-shadow = #158e76
+border-radius = 4px
+
+.wide 
+  width: 100%
+
+body
+  font-family: PT-sans
+  font-size: 16px;
+  font-weight: normal
+  background: #f2f2f2
+
+a
+  color #00B7FF
+
+/* Global */
+.page-container
+  margin: 0 5em
+
+/* Navigation */
+.main-navigation
+  border-radius: border-radius
+  background-color: color-blue-dark
+  box-shadow: 0 border-radius color-blue-dark-shadow
+  
+  position: relative
+  height: 5em
+  margin: 1.5em 0
+  padding: 0
+  overflow: hidden
+
+  ul
+    list-style: none
+    clearfix();
+    padding: 0
+    margin: 0
+    li
+      display: block
+      float: left
+      height: 5em
+      a
+        display: inline-block
+        height: 5em
+        line-height: 5em
+        padding: 0 30px
+        background-color: color-blue-normal;
+        box-shadow: 0 border-radius color-blue-normal-shadow;
+        color: white
+        font-family: open-sans
+
+        &:hover 
+          text-decoration: none
+
+  aside
+    position: absolute
+    right: 0
+    top: 0
+    height: 5em
+    input {
+      height: 3em
+      margin: 1em
+    }
+    label {
+      height: 1em
+      line-height: 1em
+      color: white
+    }
+
+
+/* Chat */
+#chatlog
+  width: 100%
+  max-width: 650px
+  height: 300px
+  overflow-x: hidden
+  overflow-y: auto
+  margin: 0
+  padding-right: 1em
+
+.chat-message
+  padding: 10px
+  border-bottom: 1px solid color-blue-dark
+  width: 100%
+  font-weight: 300
+  font-size: 0.875em
+  display: none
+  transition(all 1s)
+
+
+  span
+    display: block
+    width: 100%
+    transition(all 1s)
+
+    &.message-info
+      color: #ccc
+      font-size: 0.6875em
+      margin-top: 5px
+
+  &.unseen 
+    span
+      color: color-blue-dark
+
+      &.message-info
+        color: color-blue-dark
+  &:first-child 
+    padding-top: 0
+  &:last-child
+    border-bottom: none
+  
+
+/* Buttons */
+.btn  
+  font-family: open-sans
+  font-size: 1em
+  font-weight: 700
+  text-transform: uppercase
+
+.button-green
+  padding: 0.833333em 1.388888em
+  border-radius: border-radius;
+  background-color: color-green-light;
+  color: white
+  border: none
+
+  &:hover
+    color: color-blue-dark
+
+/* Panels */
+.panel-blue-dark
+  border-radius: border-radius
+  background-color: color-blue-dark
+  box-shadow: 0 border-radius color-blue-dark-shadow
+  color: white
+  
+  .panel-heading,
+  .panel-body,
+  .panel-footer
+    padding: 1.25em 0.9375em
+
+  .panel-heading
+    h2
+      font-family: open-sans
+      font-weight: bold
+      text-transform: uppercase
+      font-size: 0.875em
+      margin: 0
+
+  .panel-body
+    background: color-blue-dark-var
+    padding-bottom: 0.625em
+
+  .panel-footer
+    background-color: color-blue-dark
+    border: none
+    clearfix()
+
+    .btn
+      margin-top: 1em
+      float: right
+
+
+/* Input styles */
+
+
+input, 
+textarea
+    border-radius: border-radius
+    padding: 0.5em;
+    font-weight: 300
+
+    &.input-blue
+      background-color: color-blue-normal
+      border: solid 1px color-blue-normal-border
+      color: color-blue-normal-text
+      transition: all .5s
+
+      &:focus, &:focus
+        outline: none !important
+        box-shadow: 0 0 5px color-green-light
+        color: white
+
+      &.attention, &.attention
+        outline: none !important
+        box-shadow: 0 0 3px red
+
+/* Custom scrollbars */
+
+/*example1 scrollbar*/
+
+.scrollbar-2::-webkit-scrollbar{
+width: 6px
+background-color: color-blue-dark-shadow
+border-radius: 2px
+}
+.scrollbar-2::-webkit-scrollbar-thumb{
+background-color: color-green-light
+border-radius: 2px
+}
+.scrollbar-2::-webkit-scrollbar-thumb:hover{
+background-color: color-green-light-shadow
+}
+.scrollbar-2::-webkit-scrollbar-thumb:active{
+background-color: color-green-light-shadow
+}
+.scrollbar-2::-webkit-scrollbar-track{
+border: 1px solid color-blue-normal
+-webkit-box-shadow: 0 0 1px color-green-light-shadow inset
+border-radius: 2px
+}

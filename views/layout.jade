@@ -1,0 +1,26 @@
+doctype 5
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/font-awesome.min.css', type='text/css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css', type='text/css')
+    link(rel='stylesheet', href='/stylesheets/main.css', type='text/css')
+
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700', type='text/css')
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=PT+Sans:400,700', type='text/css')
+
+  body
+    .page-container
+      .row
+        include _navigation
+
+      .row
+        section.content.col-md-8.col-xs-12
+          block content
+        aside.sidebar.col-md-4.col-xs-12
+          block sidebar
+
+    script(src="/javascripts/libraries/jquery-2.0.3.min.js")
+    script(src="/javascripts/libraries/bootstrap.min.js")
+
+    block scripts

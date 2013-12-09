@@ -1,0 +1,28 @@
+extends layout
+
+block navigation-right
+  label(for="username_input") Username 
+  input.input-blue(type="text" name="username_input" id="username_input")
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+block sidebar
+
+  .panel.panel-blue-dark
+    .panel-heading
+      h2 Chat
+    .panel-body
+      #chatlog.scrollbar-2
+    .panel-footer
+      .row
+        .col-xs-12.col-lg-8
+          textarea.input-blue.wide(type="text" id="message_input" rows="3")
+        .col-xs-12.col-lg-4
+          button.btn.button-green(onclick="sendMessage()") send
+
+block scripts
+  script(src="/socket.io/socket.io.js")
+  script(src="/javascripts/chat.js")
+  script(src="/javascripts/jquery.scrollintoview.js")
