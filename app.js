@@ -10,6 +10,7 @@ var   express   = require('express')
     , app       = express()
     , server    = http.createServer(app)
     , io        = require('socket.io').listen(server)
+    , gox       = require('goxstream')
     , nib       = require('nib')
     , stylus    = require('stylus')
     , moment    = require('moment')
@@ -18,7 +19,6 @@ var   express   = require('express')
     , routes    = require('./routes');
 
 function compileStylus(str, path) {
-  console.log('STR ' + str, 'PATH ' + path);
   return stylus(str)
     .set('filename', path)
     .set('compress', true)
@@ -57,15 +57,28 @@ server.listen(app.get('port'), function(){
 });
 
 io.sockets.on('connection', function(socket) {
-    socket.on('message_to_server', function(data) {
-      var escaped_message = {
-        message : sanitize(data["message"]).escape(),
-        username : sanitize(data["username"]).escape(),
-        time : moment().calendar()
-      }
+  socket.on('message_to_server', function(data) {
+    var escaped_message = {
+      message : sanitize(data["message"]).escape(),
+      username : sanitize(data["username"]).escape(),
+      time : moment().calendar()
+    }
 
-      if ( escaped_message.message.length > 0 && escaped_message.username.length > 0) {
-        io.sockets.emit("message_to_client", escaped_message );
-      }
-    });
+    if ( escaped_message.message.length > 0 && escaped_message.username.length > 0) {
+      io.sockets.emit("message_to_client", escaped_message );
+    }
+  });
+
+  io.sockets.emit("value_to_client", previous_value );
+});
+
+var previous_value;
+gox.createStream().on('data', function(data){
+  try {
+    var last_value = JSON.parse(data).ticker.last['value'];
+    if ( last_value != previous_value ) {
+      io.sockets.emit("value_to_client", last_value );
+      previous_value = last_value;
+    }
+  } catch (err) {}
 });

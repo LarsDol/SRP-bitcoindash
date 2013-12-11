@@ -89,25 +89,41 @@ function unAttentionize($this) {
 
 // Key input
 
-$("#message_input").keypress(function(event){
+$("#message_input").keydown(function(e){
+  var $this         = $(this),
+      keyPressed    = e.keyCode,
+      shiftPressed  = e.shiftKey,
+      string;
 
-  if( event.shiftKey && event.which == '13') {
-    event.preventDefault();
-    var $this = $(this),
-        s     = $this.val();
-    
-    $this.val(s+"\n");
-  } 
-  else if (event.which == '13') {
-    event.preventDefault();
-    sendMessage();
+  switch(keyPressed)
+  {
+  case 13: // Enter key
+    e.preventDefault();
+    if(shiftPressed) {
+      string = $this.val();
+      $this.val( string + "\n" );
+    } 
+    else {
+      sendMessage();
+    }
+    break; 
+
+  case 9: // Tab key
+    e.preventDefault();
+    string = $this.val();
+    $this.val( string + "\t" );
+    break;
+
+  default:
+    break;
   }
+
 });
 
-$("#username_input").keypress(function(event){
+$("#username_input").keypress(function(e){
 
-  if (event.which == '13') {
-    event.preventDefault();
+  if (e.which == '13') {
+    e.preventDefault();
     sendMessage();
   }
 });

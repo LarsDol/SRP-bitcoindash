@@ -15,5 +15,6 @@
     , "socket.io" : "*"
     , "validator" : "*"
     , "moment"    : "*"
+    , "goxstream" : "*"
   }
 }

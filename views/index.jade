@@ -7,6 +7,7 @@ block navigation-right
 block content
   h1= title
   p Welcome to #{title}
+  p#gox-value -
 
 block sidebar
 
@@ -25,4 +26,5 @@ block sidebar
 block scripts
   script(src="/socket.io/socket.io.js")
   script(src="/javascripts/chat.js")
+  script(src="/javascripts/gox-stream.js")
   script(src="/javascripts/jquery.scrollintoview.js")
