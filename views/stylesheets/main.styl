@@ -23,6 +23,8 @@ body
   font-size: 16px;
   font-weight: normal
   background: #f2f2f2
+  background: url('/images/backgrounds/billie_holiday.png');
+  //background: url('/images/squared_metal.png') repeat;
 
 a
   color #00B7FF
@@ -82,6 +84,7 @@ a
 
 
 /* Chat */
+
 #chatlog
   width: 100%
   max-width: 650px
@@ -99,7 +102,6 @@ a
   font-size: 0.875em
   display: none
   transition(all 1s)
-
 
   span
     display: block
@@ -161,8 +163,11 @@ a
       margin: 0
 
   .panel-body
-    background: color-blue-dark-var
     padding-bottom: 0.625em
+    overflow: hidden
+
+    &.blue-light
+      background: color-blue-dark-var
 
   .panel-footer
     background-color: color-blue-dark
@@ -202,23 +207,124 @@ textarea
 
 /*example1 scrollbar*/
 
-.scrollbar-2::-webkit-scrollbar{
-width: 6px
-background-color: color-blue-dark-shadow
-border-radius: 2px
+.scrollbar-2::-webkit-scrollbar {
+  width: 6px
+  background-color: color-blue-dark-shadow
+  border-radius: 2px
 }
-.scrollbar-2::-webkit-scrollbar-thumb{
-background-color: color-green-light
-border-radius: 2px
+.scrollbar-2::-webkit-scrollbar-thumb {
+  background-color: color-green-light
+  border-radius: 2px
 }
-.scrollbar-2::-webkit-scrollbar-thumb:hover{
-background-color: color-green-light-shadow
+.scrollbar-2::-webkit-scrollbar-thumb:hover {
+  background-color: color-green-light-shadow
 }
-.scrollbar-2::-webkit-scrollbar-thumb:active{
-background-color: color-green-light-shadow
+.scrollbar-2::-webkit-scrollbar-thumb:active {
+  background-color: color-green-light-shadow
 }
-.scrollbar-2::-webkit-scrollbar-track{
-border: 1px solid color-blue-normal
--webkit-box-shadow: 0 0 1px color-green-light-shadow inset
-border-radius: 2px
+.scrollbar-2::-webkit-scrollbar-track {
+  border: 1px solid color-blue-normal
+  box-shadow: 0 0 1px color-green-light-shadow inset
+  border-radius: 2px
 }
+
+#graph_legend
+  list-style: none
+  font-size: .8em
+
+  .legend_indicator
+    display: inline-block
+    width: 27px
+    height: 13px
+    margin: 0 .5em 0 0
+    border-radius: 2px
+
+    &.green
+      background-color: color-green-light
+
+
+/* Visualisation */
+#graph
+  position: relative;
+
+  .axis text
+    fill: #9095aa
+    font-size: 11px
+
+  .axis path,
+  .axis line
+    fill: none
+    stroke: #494a5a
+    shape-rendering: auto
+
+  .path,
+  .pathShadow
+    fill: none
+    stroke: #1abc9c
+    stroke-width: 4px
+    stroke-linecap: round
+
+  .pathShadow
+    stroke-width: 2px
+    stroke: #18937b
+
+  .grid .tick
+    stroke: #494a5a
+    opacity: 0.7
+
+  .grid path
+    stroke-width: 1px
+
+  .dataPoint
+    fill: #1abc9c
+    cursor: pointer
+
+  .dataPoint:hover
+    fill: #18937b
+
+  .dataPoint_shadow
+    fill: #18937b
+
+div.tooltip
+  position: absolute
+  pointer-events: none
+  opacity: 0
+  width: 200px
+
+  .arrow_box
+    position: relative
+    background: #394264
+    padding: 20px 10px
+
+    text-align: center
+    color: #fff
+    font-size: 26px
+
+    border-radius: 4px
+    box-shadow: 0 3px #1a1822
+
+    &:after, 
+    &:before
+      top: 100%
+      left: 50%
+      border: solid transparent
+      content: " "
+      height: 0
+      width: 0
+      position: absolute
+      pointer-events: none
+
+    &:after
+      border-color: rgba(57, 66, 100, 0)
+      border-top-color: #394264
+      border-width: 8px
+      margin-left: -8px
+
+    &:before
+      border-color: rgba(26, 24, 34, 0)
+      border-top-color: #1a1822
+      border-width: 12px
+      margin-left: -12px
+
+    span.small
+      font-size: 8px

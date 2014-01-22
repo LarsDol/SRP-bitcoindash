@@ -11,12 +11,27 @@ var   express   = require('express')
     , server    = http.createServer(app)
     , io        = require('socket.io').listen(server)
     , gox       = require('goxstream')
-    , nib       = require('nib')
     , stylus    = require('stylus')
+    , nib       = require('nib')
     , moment    = require('moment')
     , sanitize  = require('validator').sanitize
+    , config    = require('./config')[app.get('env')]
 
+    , mongoose  = require('mongoose')
+    , db        = mongoose.connection
     , routes    = require('./routes');
+
+var MtgoxData;
+
+db.on('error', console.error);
+db.once('open', function() {
+  var mtgoxSchema = new mongoose.Schema({
+    json: { type: String }
+  });
+
+  MtgoxData = mongoose.model('MtgoxData', mtgoxSchema);
+});
+mongoose.connect(config.db);
 
 function compileStylus(str, path) {
   return stylus(str)
@@ -26,7 +41,7 @@ function compileStylus(str, path) {
 }
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || config.port);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -39,8 +54,8 @@ app.use(express.cookieParser('your secret here'));
 app.use(express.session());
 app.use(app.router);
 app.use(stylus.middleware({
-  src: __dirname + '/views',
-  dest: __dirname + '/public',
+  src: config.stylus.srcPath,
+  dest: config.stylus.destPath,
   compile: compileStylus
 }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -73,12 +88,34 @@ io.sockets.on('connection', function(socket) {
 });
 
 var previous_value;
+
 gox.createStream().on('data', function(data){
+  //console.log('step 1', undefined);
   try {
-    var last_value = JSON.parse(data).ticker.last['value'];
-    if ( last_value != previous_value ) {
-      io.sockets.emit("value_to_client", last_value );
-      previous_value = last_value;
+    // Save data to database
+    //console.log('test', undefined);
+/*    if (data.length > 5) {
+      var tick = new MtgoxData({ json: data });
+      tick.save(function(err, tick) {
+        if (err) return console.error(err);
+        //console.dir(tick);
+      });
+
+      io.sockets.emit("data_to_client", data);
+    } else {
+      console.log('Error saving data to database', typeof data);
+    }*/
+
+/*  // Tell client to update data.
+    var goxObject =  {
+      time: 
     }
-  } catch (err) {}
+    var current_value = JSON.parse(data).ticker.last['value'];
+    if ( current_value != previous_value ) {
+      io.sockets.emit("value_to_client", goxObject );
+      previous_value = current_value;
+    }*/
+  } catch (err) {
+    console.log('Error receiving data', err);
+  }
 });

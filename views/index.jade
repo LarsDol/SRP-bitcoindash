@@ -5,16 +5,28 @@ block navigation-right
   input.input-blue(type="text" name="username_input" id="username_input")
 
 block content
-  h1= title
-  p Welcome to #{title}
-  p#gox-value -
-
-block sidebar
+  h1 Bitcoin price chart
+  p To experiment with NodeJs, i've created this realtime bitcoin chart. To realize this, I used NodeJS for the back-end, in combination with express and socket.io. The realtime socket connection is made through pubnub's api. To visualize the chart data, i've used D3.js.
+  p#gox-value
 
   .panel.panel-blue-dark
     .panel-heading
-      h2 Chat
+      h2 Live bitcoin price
     .panel-body
+      #graph
+      ul#graph_legend
+        li
+          span.legend_indicator.green 
+          span MtGox Price
+    .panel-footer
+
+  section#gox-dump
+
+block sidebar
+  .panel.panel-blue-dark
+    .panel-heading
+      h2 Chat
+    .panel-body.blue-light
       #chatlog.scrollbar-2
     .panel-footer
       .row
@@ -26,5 +38,9 @@ block sidebar
 block scripts
   script(src="/socket.io/socket.io.js")
   script(src="/javascripts/chat.js")
-  script(src="/javascripts/gox-stream.js")
   script(src="/javascripts/jquery.scrollintoview.js")
+  script(src="/javascripts/libraries/tickp/tickp.js")
+  script(src="/javascripts/libraries/tickp/stats.js")
+  script(src="/javascripts/libraries/d3.min.js")
+  script(src="https://pubnub.a.ssl.fastly.net/pubnub.min.js")
+  script(src="/javascripts/d3_chart.js")
