@@ -330,11 +330,15 @@
 				},
 				// Callback wanneer we een nieuw prijs object ontvangen.
 				callback: function(message) {
-					// Voeg data toe aan de huidige graphData.
-					addData(message, graphData);
+					$('#loader').fadeOut(500);
+					$('#graph').animate({'opacity': 1}, 500, function(){
+						// Voeg data toe aan de huidige graphData.
+						addData(message, graphData);
 
-					// Update de grafiek op basis van de nieuwe graphData.
-					updateGraph(graphData);
+						// Update de grafiek op basis van de nieuwe graphData.
+						updateGraph(graphData);
+					});
+
 				}
 			});
 		});

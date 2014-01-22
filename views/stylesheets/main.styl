@@ -244,7 +244,8 @@ textarea
 
 /* Graph visualisation */
 #graph
-  position: relative;
+  position: relative
+  opacity: 0
 
   .axis text
     fill: #9095aa
@@ -327,3 +328,96 @@ div.tooltip
 
     span.small
       font-size: 8px
+
+/* Loader */
+
+#loader
+  position: absolute
+  width: 240px
+  height: 29px
+  
+  top: 50%
+  left: 50%
+  margin: 40px 0 0 -120px
+
+
+
+#fountainG
+  position: relative
+  width: 240px
+  height: 29px
+
+  span.load_text
+    position: absolute
+    width: 240px
+    text-align: center
+    font-weight: 300
+    font-size: .8em
+    color: #9095aa
+    
+    bottom: -25px
+    left: 0
+
+.fountainG
+  position: absolute
+  top: 0
+  background-color: #1ABC9C
+  width: 29px
+  height: 29px
+  animation-name: bounce_fountainG
+  animation-duration: 0.8s
+  animation-iteration-count: infinite
+  animation-direction: linear
+  transform: scale(.3)
+  border-radius: 19px
+
+
+#fountainG_1
+  left: 0
+  animation-delay: 0.32s
+
+
+#fountainG_2
+  left: 30px
+  animation-delay: 0.4s
+
+
+#fountainG_3
+  left: 60px
+  animation-delay: 0.48s
+
+
+#fountainG_4
+  left: 90px
+  animation-delay: 0.56s
+
+
+#fountainG_5
+  left: 120px
+  animation-delay: 0.64s
+
+
+#fountainG_6
+  left: 150px
+  animation-delay: 0.72s
+
+
+#fountainG_7
+  left: 180px
+  animation-delay: 0.8s
+
+
+#fountainG_8
+  left: 210px
+  animation-delay: 0.88s
+
+
+@keyframes bounce_fountainG
+  0%
+    transform: scale(1)
+    background-color: #1ABC9C
+
+
+  100%
+    transform: scale(.3)
+    background-color: #2b2937
