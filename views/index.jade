@@ -33,14 +33,12 @@ block sidebar
         .col-xs-12.col-lg-8
           textarea.input-blue.wide(type="text" id="message_input" rows="3")
         .col-xs-12.col-lg-4
-          button.btn.button-green(onclick="sendMessage()") send
+          button.btn.button-green#chat-send send
 
 block scripts
   script(src="/socket.io/socket.io.js")
   script(src="/javascripts/chat.js")
   script(src="/javascripts/jquery.scrollintoview.js")
-  script(src="/javascripts/libraries/tickp/tickp.js")
-  script(src="/javascripts/libraries/tickp/stats.js")
   script(src="/javascripts/libraries/d3.min.js")
   script(src="https://pubnub.a.ssl.fastly.net/pubnub.min.js")
   script(src="/javascripts/d3_chart.js")

@@ -1,7 +1,6 @@
 module.exports = {
   development: {
-    db: 'mongodb://localhost/bitcoindash_dev',
-    port: 3000,
+    port: 1337,
     app: {
       name: 'Realtime Bitcoin Dashboard'
     },
@@ -12,4 +11,4 @@ module.exports = {
   },
 
   production: {}
-}
+};

@@ -2,7 +2,7 @@
 /**
  * Module dependencies.
  */
-
+// Laad verschillende modules in
 var   express   = require('express')
     , http      = require('http')
     , fs        = require('fs')
@@ -19,6 +19,7 @@ var   express   = require('express')
 
     , routes    = require('./routes');
 
+// Functie om Stylus te compilen.
 function compileStylus(str, path) {
   return stylus(str)
     .set('filename', path)
@@ -31,6 +32,7 @@ app.set('port', process.env.PORT || config.port);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// Standaard express instellingen
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
@@ -51,12 +53,17 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+// Routes
 app.get('/', routes.index);
 
+// Message die getoond wordt wanneer server start.
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
+// Socket connectie die luistert naar het message_to_server event,
+// en het bericht opvangt, stript van potentieel schadelijke karakters,
+// en vervolgens naar alle clients stuurt, mits het bericht en de username zijn ingevuld.
 io.sockets.on('connection', function(socket) {
   socket.on('message_to_server', function(data) {
     var escaped_message = {
