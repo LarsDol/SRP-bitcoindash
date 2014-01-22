@@ -58,8 +58,14 @@
 	function addData(newData, oldData) {
 		// Convert eerst het binnen gehaalde object zodat we er iets mee kunnen.
 		convertData(newData);
-		// Push het object in de array met oude data.
-		oldData.push(newData);
+
+		// Filter objecten met een gebugde date er uit.
+		if ( oldData[oldData.length - 1].date < newData.date ) {
+			// Push het object in de array met oude data.
+			oldData.push(newData);
+		} else {
+			console.log( 'Bugged date found, filtering. - ', newData.date, 'vs', oldData[oldData.length - 1].date );
+		}
 	}
 
 	/* Visualisatie */
