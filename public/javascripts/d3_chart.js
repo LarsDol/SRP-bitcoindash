@@ -56,15 +56,16 @@
 
 	// Voeg nieuwe data toe aan de al bestaande data.
 	function addData(newData, oldData) {
-		// Convert eerst het binnen gehaalde object zodat we er iets mee kunnen.
-		convertData(newData);
-
 		// Filter objecten met een gebugde date er uit.
-		if ( oldData[oldData.length - 1].date < newData.date ) {
+
+		if ( oldData && oldData[oldData.length - 1].ticker.now < newData.ticker.now ) {
+			// Convert eerst het binnen gehaalde object zodat we er iets mee kunnen.
+			convertData(newData);
+
 			// Push het object in de array met oude data.
 			oldData.push(newData);
 		} else {
-			console.log( 'Bugged date found, filtering. - ', newData.date, 'vs', oldData[oldData.length - 1].date );
+			console.log( 'Bugged date found, filtering. - ', newData.ticker.now, '(new) vs', oldData[oldData.length - 1].ticker.now, '(old).' );
 		}
 	}
 
