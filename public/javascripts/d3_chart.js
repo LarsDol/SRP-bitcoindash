@@ -71,8 +71,8 @@
 		height = 440 - margin.top - margin.bottom,
 		dotRadius = 3,
 		interpolationStyle = 'linear',
-		extendFactorTop = 1.01,
-		extendFactorBottom = 0.99,
+		extendFactorTop = 1.005,
+		extendFactorBottom = 0.995,
 
 		// Stel het format in waarmee dates gelezen moeten worden.
 		parseDate = d3.time.format("%d-%b-%y").parse,
