@@ -312,7 +312,7 @@
 	$(document).ready(function () {
 
 		// Begin met het laden van de history.
-		historyLoader.loadHistory((Date.now() - 60000), 20000, function (data) {
+/*		historyLoader.loadHistory((Date.now() - 60000), 20000, function (data) {
 			// Converteer alle data
 			data.forEach(convertData);
 
@@ -342,7 +342,63 @@
 				}
 			});
 		});
+*/
+		generateData(5);
+		initGraph(fakeData);
+
+		window.setTimeout(function(){
+			$('#loader').fadeOut(500);
+			$('#graph').animate({'opacity': 1}, 500, function(){
+				// Voeg data toe aan de huidige graphData.
+				//addData(message, graphData);
+
+				// Update de grafiek op basis van de nieuwe graphData.
+				//console.log('', data);
+
+				window.setInterval(function() {
+					var newData = generateDataPoint(0);		
+					// Voeg data toe aan de huidige graphData.
+					addData(newData, fakeData);
+					updateGraph(fakeData);
+				}, randomTime);
+				
+			});
+		}, 3000);
 	});
+
+	var dataLoaded = false,
+		fakeData = [],
+		randomTime = Math.floor(Math.random() * 2000) + 3000;
+
+	function generateData(number) {
+		var dataPoint = {},
+			timeStep = 10 * 1000, // seconds
+			timePast = timeStep * number,
+			i;
+
+		for( i = 0; i < number; i += 1 ) {
+			dataPoint = generateDataPoint(timePast);
+			fakeData.push(dataPoint);
+			timePast -= timeStep;
+		}
+		fakeData.forEach(convertData);
+		dataLoaded = true;
+
+	}
+
+	function generateDataPoint(timePast) {
+		var dataPoint = {
+			valueX: new Date().getTime() - timePast,
+			valueY: Math.floor(Math.random() * 100) + 300,
+			ticker: {
+				now: (new Date().getTime() - timePast) * 1000,
+				last: {
+					value: Math.floor(Math.random() * 100) + 300
+				}
+			}
+		};
+		return dataPoint;
+	}
 
 }());
 
